@@ -3,7 +3,7 @@
 namespace ArturDoruch\Tool;
 
 /**
- * Adds handler to signals (SIGTERM, SIGINT, SIGHUP) killing process.
+ * Adds handler to signals (SIGTERM, SIGINT, SIGHUP, SIGTSTP) killing process.
  *
  * @author Artur Doruch <arturdoruch@interia.pl>
  */
@@ -32,11 +32,11 @@ class ProcessKillHandler
         pcntl_signal(SIGTERM, $handler);
         pcntl_signal(SIGINT, $handler);
         pcntl_signal(SIGHUP, $handler);
-        //pcntl_signal(SIGTSTP, $handler);
+        pcntl_signal(SIGTSTP, $handler);
     }
 
     /**
-     * Checks if one of signals: SIGTERM, SIGINT, SIGHUP, SIGTSTP has been send.
+     * Checks if one of killing signal (SIGTERM, SIGINT, SIGHUP, SIGTSTP) has been send.
      *
      * @return bool
      */

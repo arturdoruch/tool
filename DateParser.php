@@ -29,12 +29,17 @@ class DateParser
             return null;
         }
 
+        $date = self::fixMonth($date);
+
         try {
-            return new \DateTime($date);
+            $dateObject = new \DateTime($date);
+
+            if ($dateObject && preg_match('/(\d{4})/', $date, $matches) && $matches[1] == $dateObject->format('Y')) {
+                return $dateObject;
+            }
         } catch (\Exception $e) {
         }
 
-        $date = self::fixMonth($date);
         $parts = date_parse($date);
 
         if ($parts['error_count'] === 0) {

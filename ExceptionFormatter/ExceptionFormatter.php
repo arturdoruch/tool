@@ -8,9 +8,9 @@ namespace ArturDoruch\Tool\ExceptionFormatter;
 class ExceptionFormatter
 {
     /**
-     * @var string The path to the application directory, using to shorting trace filename.
+     * @var string The application directory path used to shorting the exception trace filename.
      */
-    private $appDir = '';
+    private $appDir = '/';
 
     /**
      * @var bool
@@ -29,7 +29,7 @@ class ExceptionFormatter
     ];
 
     /**
-     * @param string $appDir
+     * @param string $appDir The application directory path used to shorting the exception trace filename.
      * @param array $traceHtmlTemplates
      *  - list (string)
      *  - listItem (string)
@@ -40,7 +40,11 @@ class ExceptionFormatter
     public function __construct(string $appDir = '', array $traceHtmlTemplates = [])
     {
         if ($appDir) {
-            $this->appDir = rtrim(realpath($appDir), '/') . '/';
+            if (!$path = realpath($appDir)) {
+                throw new \InvalidArgumentException(sprintf('The application directory path "%s" does not exist.', $appDir));
+            }
+
+            $this->appDir = rtrim($path, '/') . '/';
         }
 
         $this->traceHtmlTemplates = array_merge($this->traceHtmlTemplates, $traceHtmlTemplates);
@@ -50,7 +54,7 @@ class ExceptionFormatter
      * Formats exception properties.
      *
      * @param \Throwable $e
-     * @param bool $shortenFilename
+     * @param bool $shortenFilename Whether the filename should be shorten.
      *
      * @return array
      */
@@ -73,7 +77,7 @@ class ExceptionFormatter
      * Gets exception trace formatted to HTML.
      *
      * @param \Throwable $e
-     * @param bool $shortenFilename
+     * @param bool $shortenFilename Whether the filename should be shorten.
      *
      * @return string
      */

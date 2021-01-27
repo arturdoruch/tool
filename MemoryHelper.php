@@ -26,16 +26,19 @@ class MemoryHelper
     }
 
     /**
+     * @todo In version 2.0 set parameter $addUnit as default to true.
+     *
      * Gets formatted peak of the allocated memory.
      *
      * @param string $unit The size unit. One of: bytes, kB, MB, GB, TB.
      * @param int $precision
+     * @param bool $addUnit Whether to add size unit to the returned value.
      *
-     * @return float
+     * @return float|string
      */
-    public static function getPeakUsage(string $unit = 'bytes', int $precision = 0): float
+    public static function getPeakUsage(string $unit = 'bytes', int $precision = 0, bool $addUnit = false)
     {
-        return sprintf('%.'.$precision.'f', memory_get_peak_usage() / self::getMultiplier($unit));
+        return sprintf('%.'.$precision.'f', memory_get_peak_usage() / self::getMultiplier($unit)) . ($addUnit ? ' '.$unit : '');
     }
 
 

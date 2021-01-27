@@ -8,15 +8,20 @@ namespace ArturDoruch\Tool;
 class MemoryHelper
 {
     /**
+     * Validates limit of memory peak usage.
+     *
      * @param float $limit
-     * @param string $unit
+     * @param string $unit The limit size unit. One of: bytes, kB, MB, GB, TB.
      *
      * @throws \RuntimeException when memory limit is reached.
      */
-    public static function validateLimit($limit, $unit = 'bytes')
+    public static function validateLimit(float $limit, string $unit = 'bytes')
     {
-        if (memory_get_peak_usage() > $limit * self::getMultiplier($unit)) {
-            throw new \RuntimeException(sprintf('The memory limit %s %s has been reached.', $limit, $unit));
+        if (($usage = memory_get_peak_usage()) > $limit * self::getMultiplier($unit)) {
+            throw new \RuntimeException(sprintf(
+                'The memory usage limit of %s %s has been reached with the value %d bytes.',
+                $limit, $unit, $usage
+            ));
         }
     }
 

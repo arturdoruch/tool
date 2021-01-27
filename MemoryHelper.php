@@ -21,38 +21,36 @@ class MemoryHelper
     }
 
     /**
-     * Gets formatted allocated peak memory.
+     * Gets formatted peak of the allocated memory.
      *
-     * @param string $unit The size unit, one of: bytes, kB, MB, GB, TB, PB.
+     * @param string $unit The size unit. One of: bytes, kB, MB, GB, TB.
      * @param int $precision
      *
      * @return float
      */
-    public static function getPeakUsage($unit = 'bytes', $precision = 0)
+    public static function getPeakUsage(string $unit = 'bytes', int $precision = 0): float
     {
-        return round(memory_get_peak_usage() / self::getMultiplier($unit), $precision);
+        return sprintf('%.'.$precision.'f', memory_get_peak_usage() / self::getMultiplier($unit));
     }
 
-    /**
-     * @param string $unit The size unit, one of: bytes, kB, MB, GB, TB, PB.
-     *
-     * @return number
-     */
-    private static function getMultiplier($unit)
+
+    private static function getMultiplier(string $unit): float
     {
-        $unitExpMap = [
+        static $unitExponentMap = [
             'bytes' => 0,
             'kB' => 1,
             'MB' => 2,
             'GB' => 3,
             'TB' => 4,
-            'PB' => 5,
         ];
 
-        /*if (!isset($unitExpMap[$unit])) {
-            throw new \InvalidArgumentException(sprintf('Invalid size unit "%s"', $unit));
-        }*/
+        if (!isset($unitExponentMap[$unit])) {
+            throw new \InvalidArgumentException(sprintf(
+                'Invalid size unit "%s". Allowed units are: "%s".',
+                $unit, join('", "', array_keys($unitExponentMap))
+            ));
+        }
 
-        return pow(1024, $unitExpMap[$unit]);
+        return pow(1024, $unitExponentMap[$unit]);
     }
 }

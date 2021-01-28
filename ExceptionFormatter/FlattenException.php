@@ -17,6 +17,8 @@ namespace ArturDoruch\Tool\ExceptionFormatter;
  * Modified by Artur Doruch <arturdoruch@interia.pl>
  *
  * @author Fabien Potencier <fabien@symfony.com>
+ *
+ * @internal
  */
 class FlattenException
 {

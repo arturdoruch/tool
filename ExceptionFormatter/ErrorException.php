@@ -4,6 +4,8 @@ namespace ArturDoruch\Tool\ExceptionFormatter;
 
 /**
  * @author Artur Doruch <arturdoruch@interia.pl>
+ *
+ * @internal
  */
 class ErrorException extends \ErrorException
 {

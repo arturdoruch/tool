@@ -26,8 +26,6 @@ class MemoryHelper
     }
 
     /**
-     * @todo In version 2.0 set parameter $addUnit as default to true.
-     *
      * Gets formatted peak of the allocated memory.
      *
      * @param string $unit The size unit. One of: bytes, kB, MB, GB, TB.
@@ -35,6 +33,8 @@ class MemoryHelper
      * @param bool $addUnit Whether to add size unit to the returned value.
      *
      * @return float|string
+     *
+     * @deprecated Use ArturDoruch\Filesystem\FileSize from the "arturdoruch/filesystem" component instead.
      */
     public static function getPeakUsage(string $unit = 'bytes', int $precision = 0, bool $addUnit = false)
     {

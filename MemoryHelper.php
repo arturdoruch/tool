@@ -4,6 +4,8 @@ namespace ArturDoruch\Tool;
 
 /**
  * @author Artur Doruch <arturdoruch@interia.pl>
+ *
+ * @deprecated Use MemoryUsageLimiter from the arturdoruch/process-util package instead.
  */
 class MemoryHelper
 {

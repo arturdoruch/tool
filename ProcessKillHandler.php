@@ -6,6 +6,8 @@ namespace ArturDoruch\Tool;
  * Adds handler to signals (SIGTERM, SIGINT, SIGHUP, SIGTSTP) killing the process.
  *
  * @author Artur Doruch <arturdoruch@interia.pl>
+ *
+ * @deprecated Use ProcessKillHandler from the arturdoruch/process-util package instead.
  */
 class ProcessKillHandler
 {

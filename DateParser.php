@@ -4,6 +4,8 @@ namespace ArturDoruch\Tool;
 
 /**
  * @author Artur Doruch <arturdoruch@interia.pl>
+ *
+ * @deprecated Use the arturdoruch/date-parser package instead.
  */
 class DateParser
 {

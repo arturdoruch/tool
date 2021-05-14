@@ -3,11 +3,12 @@
 namespace ArturDoruch\Tool\Tests;
 
 use ArturDoruch\Tool\DateParser;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Artur Doruch <arturdoruch@interia.pl>
  */
-class DateParserTest extends \PHPUnit\Framework\TestCase
+class DateParserTest extends TestCase
 {
     public function getDateData()
     {
